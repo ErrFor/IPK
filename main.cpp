@@ -39,7 +39,7 @@ void IPKCPCClient::run() {
     } else {
         throw std::runtime_error("Invalid mode specified");
     }
-}
+} 
 
 // Print usage instructions for the program
 void print_usage() {
