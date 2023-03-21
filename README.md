@@ -70,10 +70,37 @@ Once the client is connected, you can enter commands or expressions, which will 
 
 To ensure the correct functionality of the IPKCPC Client, a series of tests were performed. The tests cover various aspects of the client, including:
 
-- Connecting to a server using both TCP and UDP protocols.
-- Sending requests to the server and receiving responses.
-- Handling invalid input or unexpected server responses.
-- Gracefully handling connection errors and other exceptions.
+- TCP:
+  - Send message test: ./ipkcpc -h 127.0.0.1 -p 2023 -m tcp 
+     - INPUT: HELLO
+     - OUTPUT: HELLO
+  - Message acceptance test: ./ipkcpc -h 127.0.0.1 -p 2023 -m tcp 
+     - INPUT: SOLVE (+ 10 15)
+     - OUTPUT: RESULT 25
+  - С-с test: ./ipkcpc -h 127.0.0.1 -p 2023 -m tcp 
+     - INPUT: ^C, BYE
+     - OUTPUT: BYE, `close connection`
+  - Wrong input test  ./ipkcpc -h 127.0.0.1 -p 2023 -m tcp 
+     - INPUT: hello
+     - OUTPUT: BYE
+  - Test for invalid arguments: ./ipkcpc -h 127.0.0.1 -p 2023 -m TCP 
+     - OUTPUT: Usage: ipkcpc -h `<host>` -p `<port>` -m `<mode>` (tcp|udp)    
+
+- UDP:
+  - Send message test: ./ipkcpc -h 127.0.0.1 -p 2023 -m udp 
+     - INPUT: (+ 1 2)
+     - OUTPUT: OK:3
+  - Message acceptance test: ./ipkcpc -h 127.0.0.1 -p 2023 -m udp 
+     - INPUT: (+ 1 2)
+     - OUTPUT: OK:3
+  - С-с test: ./ipkcpc -h 127.0.0.1 -p 2023 -m udp 
+     - INPUT: ^C
+     - OUTPUT: `close connection`
+  - Wrong input test: ./ipkcpc -h 127.0.0.1 -p 2023 -m udp 
+     - INPUT: SOLVE (+ 1 2)
+     - OUTPUT: ERR:Invalid expression: s o l v e   ( +   1   2 )
+  - Test for invalid arguments: ./ipkcpc -h 127.0.0.1 -p 2023 -m UDP 
+     - OUTPUT: Usage: ipkcpc -h <host> -p <port> -m <mode> (tcp|udp)
 
 These tests were performed using a mock server designed to emulate various scenarios and edge cases. The mock server allowed us to verify that the IPKCPC Client operates as expected and can handle a variety of situations.
 
