@@ -2,17 +2,18 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Getting Started](#getting-started)
+- [IPKCPC Client](#ipkcpc-client)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Building](#building)
-- [Usage](#usage)
-- [Architecture](#architecture)
-    - [Class Diagram](#class-diagram)
+  - [Usage](#usage)
+  - [Architecture](#architecture)
     - [Core Components](#core-components)
-- [Testing](#testing)
-- [Extra Features](#extra-features)
-- [Bibliography](#bibliography)
+  - [Testing](#testing)
+  - [Extra Features](#extra-features)
+  - [Bibliography](#bibliography)
 
 ## Overview
 
@@ -57,30 +58,6 @@ Once the client is connected, you can enter commands or expressions, which will 
 
 ## Architecture
 
-### Class Diagram
-
-+------------------+
-|   IPKCPCClient   |
-+------------------+
-| -host: string    |
-| -port: int       |
-| -mode: string    |
-+------------------+
-| +run(): void     |
-+------------------+
-            |
-            +------------------------+
-            |                        |
-  +-----------------+     +----------------+
-  |    TCPClient    |     |   UDPClient    |
-  +-----------------+     +----------------+
-  | -host: string   |     | -host: string  |
-  | -port: int      |     | -port: int     |
-  | -sockfd: int    |     | -sockfd: int   |
-  +-----------------+     +----------------+
-  | +run(): void    |     | +run(): void   |
-  +-----------------+     +----------------+
-
 
 ### Core Components
 
@@ -116,5 +93,3 @@ The IPKCPC Client offers the following additional features beyond the standard r
 - The C++ Standard Library by Nicolai M. Josuttis
 - C++ Primer (5th Edition) by Stanley B. Lippman, Josée Lajoie, and Barbara E. Moo
 - Stack Overflow (Various threads for specific issues and examples)
-
-# IPK
