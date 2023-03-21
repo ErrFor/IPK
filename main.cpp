@@ -1,6 +1,45 @@
 #include <iostream>
 #include <string>
-#include "ipkcpc_client.h"
+#include <stdexcept>
+#include "tcp_client.h"
+#include "udp_client.h"
+
+class IPKCPCClient {
+public:
+    // Constructor
+    IPKCPCClient(const std::string &host, int port, const std::string &mode);
+    
+    // Destructor
+    ~IPKCPCClient();
+
+    // Run the appropriate client based on the specified mode
+    void run();
+
+private:
+    std::string host_;
+    int port_;
+    std::string mode_;
+};
+
+// Constructor
+IPKCPCClient::IPKCPCClient(const std::string &host, int port, const std::string &mode)
+    : host_(host), port_(port), mode_(mode) {}
+
+// Destructor
+IPKCPCClient::~IPKCPCClient() {}
+
+// Run the appropriate client based on the specified mode
+void IPKCPCClient::run() {
+    if (mode_ == "tcp") {
+        TCPClient client(host_, port_);
+        client.run();
+    } else if (mode_ == "udp") {
+        UDPClient client(host_, port_);
+        client.run();
+    } else {
+        throw std::runtime_error("Invalid mode specified");
+    }
+}
 
 // Print usage instructions for the program
 void print_usage() {
